@@ -37,7 +37,7 @@ def predict():
                                 parents, income, exam_score]])
 
     prediction = model.predict(input_features)[0]
-    prob = prediction  # Since it's regression, use the score directly
+    prob = model.predict_proba(input_features)[0][1]
 
     if prediction >= 0.5:
         result = "⚠️ Student likely to Dropout"
@@ -49,4 +49,4 @@ def predict():
     return render_template("result.html", prediction=result, prob=probability)
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(host="0.0.0.0", port=10000)
